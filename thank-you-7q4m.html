@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A UK-specific organiser for women looking after an ageing parent: NHS, council, DWP and Power of Attorney paperwork in one fillable file.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Your Parent Care File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm reading column; the hero pairs the promise with a filled-in sample page of the file, like a real form on a desk. */
+:root {
+  --paper: #eef1f4;
+  --card: #ffffff;
+  --ink: #1d2a3a;
+  --muted: #55657a;
+  --rule: #c9d2dc;
+  --mark: #ffe46b;      /* highlighter */
+  --accent: #23507a;    /* form-ink blue */
+  --accent-ink: #ffffff;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #131a22; --card: #1b2430; --ink: #e6ecf2; --muted: #9fb0c3;
+    --rule: #33414f; --mark: #8a7414; --accent: #8fbfe8; --accent-ink: #0f1720; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #131a22; --card: #1b2430; --ink: #e6ecf2; --muted: #9fb0c3;
+  --rule: #33414f; --mark: #8a7414; --accent: #8fbfe8; --accent-ink: #0f1720; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 48px 64px; display: grid; gap: 72px; }
+h1, h2 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.3rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); }
+p { margin: 0; max-width: 62ch; }
+.eyebrow { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+mark { background: linear-gradient(transparent 55%, var(--mark) 55%); color: inherit; padding: 0 2px; }
+a { color: var(--accent); }
+
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.hero > * { min-width: 0; }
+.hero-text { display: grid; gap: 22px; }
+.lede { font-size: 1.15rem; color: var(--muted); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.btn {
+  display: inline-block; background: var(--accent); color: var(--accent-ink);
+  font-weight: 700; text-decoration: none; padding: 14px 24px; border-radius: 6px; font-size: 1.05rem;
+}
+.btn:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; }
+.price-note { color: var(--muted); font-size: 0.95rem; }
+
+/* the sample page */
+.sheet {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 4px;
+  padding: 24px 24px 20px; box-shadow: 0 18px 40px -24px rgba(20, 35, 55, 0.45);
+  transform: rotate(-1.2deg); display: grid; gap: 14px;
+}
+.sheet-head { display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; flex-wrap: wrap; }
+.sheet-head strong { font-family: var(--display); font-size: 1.2rem; }
+.sheet-head span { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); align-self: end; }
+.field { display: grid; grid-template-columns: 9.5rem 1fr; gap: 10px; border-bottom: 1px dashed var(--rule); padding-bottom: 6px; font-size: 0.92rem; }
+.field > * { min-width: 0; }
+.field dt { color: var(--muted); }
+.field dd { margin: 0; font-family: var(--mono); font-size: 0.86rem; overflow-wrap: anywhere; }
+.field dd.due { background: var(--mark); color: var(--ink); padding: 0 4px; justify-self: start; }
+.sheet dl { margin: 0; display: grid; gap: 8px; }
+.sheet small { font-size: 0.75rem; color: var(--muted); }
+
+section { display: grid; gap: 20px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px; }
+.inside { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.inside li { border-top: 1px solid var(--rule); padding: 14px 0; display: grid; gap: 2px; }
+.inside b { font-family: var(--display); font-size: 1.15rem; font-weight: 600; }
+.inside span { color: var(--muted); font-size: 0.98rem; }
+
+.callout { background: var(--card); border-left: 4px solid var(--accent); padding: 22px 24px; display: grid; gap: 10px; }
+.callout p { max-width: 70ch; }
+.src { font-size: 0.85rem; color: var(--muted); }
+
+.offer { background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 32px; display: grid; gap: 18px; justify-items: start; }
+.prices { display: flex; gap: 28px; flex-wrap: wrap; align-items: baseline; font-variant-numeric: tabular-nums; }
+.prices .now { font-family: var(--display); font-size: 2.6rem; font-weight: 600; }
+.prices .later { color: var(--muted); }
+
+.faq { display: grid; gap: 0; }
+.faq details { border-top: 1px solid var(--rule); padding: 14px 0; }
+.faq summary { cursor: pointer; font-weight: 700; }
+.faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.faq details p { margin-top: 8px; color: var(--muted); }
+footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--rule); padding-top: 18px; display: grid; gap: 6px; }
+
+@media (max-width: 760px) {
+  .hero, .two, .inside { grid-template-columns: 1fr; }
+  .sheet { transform: none; }
+  .field { grid-template-columns: 1fr; gap: 0; }
+  .wrap { gap: 56px; padding-block: 32px 48px; }
+  body { font-size: 17px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: transform .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+}
+body{margin:0}
+</style>
+</head>
+<body>
+<div class="wrap" style="max-width:720px">
+  <section class="offer" aria-labelledby="ty">
+    <span class="eyebrow">Payment received</span>
+    <h1 id="ty">Thank you. Here's your Parent Care File.</h1>
+    <p>Download it now and save it somewhere you'll find it again, such as your computer's Documents folder or a shared family drive.</p>
+    <a class="btn" id="download" href="https://www.dropbox.com/scl/fi/pxhgf7b287xehkdyxwgik/The-Parent-Care-File.pdf?rlkey=pyqsqnewi5g37updesgfojy9l&dl=1">Download the PDF</a>
+    <p class="price-note">27 pages, A4, about 1 MB. You'll also get a payment receipt from Stripe by email.</p>
+  </section>
+  <section>
+    <h2>Getting started</h2>
+    <ul class="inside">
+      <li><b>Open it in a form-friendly reader</b><span>Adobe Acrobat Reader (free) or Preview on a Mac saves what you type. Some browser viewers don't.</span></li>
+      <li><b>Start with page 3</b><span>Write down the dates that matter, then fill in key details and medicines.</span></li>
+      <li><b>Keep secrets out</b><span>No PINs, passwords, account numbers or key safe codes. Note where they're kept instead.</span></li>
+      <li><b>Share a copy</b><span>Send it to whoever else helps, and use the rota on page 24.</span></li>
+    </ul>
+  </section>
+  <footer>
+    <span>Problems downloading? Email info@baladanmeri.com with your receipt and we'll send it directly.</span>
+    <span>The Parent Care File · Noor Intelligence, Wincanton, Somerset</span>
+  </footer>
+</div>
+</body>
+</html>
