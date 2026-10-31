@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A UK-specific organiser for women looking after an ageing parent: NHS, council, DWP and Power of Attorney paperwork in one fillable file.">
+<title>The Parent Care File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm reading column; the hero pairs the promise with a filled-in sample page of the file, like a real form on a desk. */
+:root {
+  --paper: #eef1f4;
+  --card: #ffffff;
+  --ink: #1d2a3a;
+  --muted: #55657a;
+  --rule: #c9d2dc;
+  --mark: #ffe46b;      /* highlighter */
+  --accent: #23507a;    /* form-ink blue */
+  --accent-ink: #ffffff;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #131a22; --card: #1b2430; --ink: #e6ecf2; --muted: #9fb0c3;
+    --rule: #33414f; --mark: #8a7414; --accent: #8fbfe8; --accent-ink: #0f1720; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #131a22; --card: #1b2430; --ink: #e6ecf2; --muted: #9fb0c3;
+  --rule: #33414f; --mark: #8a7414; --accent: #8fbfe8; --accent-ink: #0f1720; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 18px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 48px 64px; display: grid; gap: 72px; }
+h1, h2 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.3rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); }
+p { margin: 0; max-width: 62ch; }
+.eyebrow { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+mark { background: linear-gradient(transparent 55%, var(--mark) 55%); color: inherit; padding: 0 2px; }
+a { color: var(--accent); }
+
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.hero > * { min-width: 0; }
+.hero-text { display: grid; gap: 22px; }
+.lede { font-size: 1.15rem; color: var(--muted); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.btn {
+  display: inline-block; background: var(--accent); color: var(--accent-ink);
+  font-weight: 700; text-decoration: none; padding: 14px 24px; border-radius: 6px; font-size: 1.05rem;
+}
+.btn:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; }
+.price-note { color: var(--muted); font-size: 0.95rem; }
+
+/* the sample page */
+.sheet {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 4px;
+  padding: 24px 24px 20px; box-shadow: 0 18px 40px -24px rgba(20, 35, 55, 0.45);
+  transform: rotate(-1.2deg); display: grid; gap: 14px;
+}
+.sheet-head { display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; flex-wrap: wrap; }
+.sheet-head strong { font-family: var(--display); font-size: 1.2rem; }
+.sheet-head span { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); align-self: end; }
+.field { display: grid; grid-template-columns: 9.5rem 1fr; gap: 10px; border-bottom: 1px dashed var(--rule); padding-bottom: 6px; font-size: 0.92rem; }
+.field > * { min-width: 0; }
+.field dt { color: var(--muted); }
+.field dd { margin: 0; font-family: var(--mono); font-size: 0.86rem; overflow-wrap: anywhere; }
+.field dd.due { background: var(--mark); color: var(--ink); padding: 0 4px; justify-self: start; }
+.sheet dl { margin: 0; display: grid; gap: 8px; }
+.sheet small { font-size: 0.75rem; color: var(--muted); }
+
+section { display: grid; gap: 20px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px; }
+.inside { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.inside li { border-top: 1px solid var(--rule); padding: 14px 0; display: grid; gap: 2px; }
+.inside b { font-family: var(--display); font-size: 1.15rem; font-weight: 600; }
+.inside span { color: var(--muted); font-size: 0.98rem; }
+
+.callout { background: var(--card); border-left: 4px solid var(--accent); padding: 22px 24px; display: grid; gap: 10px; }
+.callout p { max-width: 70ch; }
+.src { font-size: 0.85rem; color: var(--muted); }
+
+.offer { background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 32px; display: grid; gap: 18px; justify-items: start; }
+.prices { display: flex; gap: 28px; flex-wrap: wrap; align-items: baseline; font-variant-numeric: tabular-nums; }
+.prices .now { font-family: var(--display); font-size: 2.6rem; font-weight: 600; }
+.prices .later { color: var(--muted); }
+
+.faq { display: grid; gap: 0; }
+.faq details { border-top: 1px solid var(--rule); padding: 14px 0; }
+.faq summary { cursor: pointer; font-weight: 700; }
+.faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.faq details p { margin-top: 8px; color: var(--muted); }
+footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--rule); padding-top: 18px; display: grid; gap: 6px; }
+
+@media (max-width: 760px) {
+  .hero, .two, .inside { grid-template-columns: 1fr; }
+  .sheet { transform: none; }
+  .field { grid-template-columns: 1fr; gap: 0; }
+  .wrap { gap: 56px; padding-block: 32px 48px; }
+  body { font-size: 17px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: transform .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+}
+body{margin:0}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">For daughters looking after a parent · UK edition</span>
+      <h1>Everything about Mum's care, in one file you can find at 11pm.</h1>
+      <p class="lede">The Parent Care File is a fillable, printable organiser built around how care actually works in the UK: the NHS, your council, the DWP and Power of Attorney. Fill it in once, share it with your siblings, and stop carrying it all in your head.</p>
+      <div class="cta-row">
+        <a class="btn" id="cta-top" href="#join">Pre-order for £9</a>
+        <span class="price-note">Early-bird price · delivered by 28 November 2026</span>
+      </div>
+    </div>
+
+    <aside class="sheet" aria-label="Sample page from the file, filled with example details">
+      <div class="sheet-head"><strong>Key details: Mum</strong><span>EXAMPLE PAGE</span></div>
+      <dl>
+        <div class="field"><dt>NHS number</dt><dd>485 777 3456</dd></div>
+        <div class="field"><dt>GP surgery</dt><dd>Market St Practice · 01963 000000</dd></div>
+        <div class="field"><dt>LPA (finance)</dt><dd>Registered · copy in section 4</dd></div>
+        <div class="field"><dt>LPA (health)</dt><dd>Not yet made</dd></div>
+        <div class="field"><dt>Attendance Allowance</dt><dd>Decision letter 3 Oct 2026</dd></div>
+        <div class="field"><dt>Carer's Allowance</dt><dd class="due">Claim by 2 Jan 2027</dd></div>
+        <div class="field"><dt>Energy supplier</dt><dd>On Priority Services Register</dd></div>
+      </dl>
+      <small>Illustration with made-up details.</small>
+    </aside>
+  </header>
+
+  <section class="two" aria-labelledby="problem">
+    <div style="display:grid;gap:16px">
+      <h2 id="problem">It creeps up, then it's all on you</h2>
+    </div>
+    <div style="display:grid;gap:16px">
+      <p>It starts with a login and a form. Then it's the pension credit, the council, a hospital discharge, a care assessment, and a brother who lives "too far away" to help.</p>
+      <p>Most care organisers you can buy are American. They talk about Medicare and advance directives, and they leave out the UK paperwork that actually decides what help your parent gets.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="inside">
+    <span class="eyebrow">What's inside</span>
+    <h2 id="inside">Eight sections, about 30 pages</h2>
+    <ul class="inside">
+      <li><b>Key details</b><span>NHS number, GP, pharmacy, National Insurance number, who to call first.</span></li>
+      <li><b>Medicines and appointments</b><span>A running medicines list and an appointment log you can hand to a paramedic.</span></li>
+      <li><b>Power of Attorney</b><span>Which LPAs exist, where the originals are, and a checklist for getting them made.</span></li>
+      <li><b>Benefits and deadlines</b><span>Attendance Allowance, Carer's Allowance, Pension Credit and Council Tax, with the dates that matter.</span></li>
+      <li><b>Council and care</b><span>Care needs assessment notes, care plan, carers' visit times and contacts.</span></li>
+      <li><b>Home and safety</b><span>Key safe code location, falls alarm, Priority Services Register, utilities.</span></li>
+      <li><b>Hospital stays</b><span>A grab sheet for admission and a discharge checklist.</span></li>
+      <li><b>Sharing it out</b><span>A one-page rota so siblings can see who does what.</span></li>
+    </ul>
+  </section>
+
+  <section class="callout" aria-labelledby="dates">
+    <h2 id="dates">The dates that cost money if you miss them</h2>
+    <p>If your parent is awarded Attendance Allowance and you care for them 35 hours a week or more, the DWP's own notes say <mark>you must claim Carer's Allowance within 3 months of the Attendance Allowance decision</mark> or you could lose benefit. The file puts that date, and others like it, on the first page.</p>
+    <p class="src">Source: DWP, AA5 notes (11/25), <a href="https://assets.publishing.service.gov.uk/media/695e7078e83db7562d671939/aa5_notes.pdf">gov.uk</a>. Rules can change, so the file links to the current gov.uk page for each one.</p>
+  </section>
+
+  <section class="two" aria-labelledby="who">
+    <div><h2 id="who">Who it's for</h2></div>
+    <div style="display:grid;gap:14px">
+      <p>Women in their 50s and 60s who have become the main carer for a parent, often while working and sometimes while caring for children or grandchildren too.</p>
+      <p>Useful whether your parent lives with you, down the road, or three hours away.</p>
+    </div>
+  </section>
+
+  <section class="offer" id="join" aria-labelledby="price">
+    <span class="eyebrow">Pre-order open</span>
+    <h2 id="price">Get the early-bird price</h2>
+    <div class="prices"><span class="now">£9</span><span class="later">£14 after launch</span></div>
+    <p>Pre-order now and the file is emailed to you by 28 November 2026. If it isn't delivered by then, you get a full refund.</p>
+    <div class="cta-row">
+      <a class="btn" id="cta-join" href="https://buy.stripe.com/00weVf7UIabhgoPbdt0oM01">Pre-order for £9</a>
+      <a id="cta-waitlist" href="https://tally.so/r/6DL22J">Not ready to buy? Join the free waitlist</a>
+    </div>
+    <p class="price-note">Fillable PDF, A4, prints at home. Secure payment by Stripe.</p>
+  </section>
+
+  <section class="faq" aria-labelledby="faq">
+    <h2 id="faq" style="margin-bottom:12px">Questions</h2>
+    <details><summary>Does it cover Scotland and Northern Ireland?</summary><p>It's written for England and Wales. Power of Attorney works differently in Scotland and Northern Ireland, so those pages point you to the right official service instead.</p></details>
+    <details><summary>Is this legal or financial advice?</summary><p>No. It's an organiser with checklists and links to official guidance from gov.uk, Age UK and Carers UK. For decisions about money or the law, speak to an adviser.</p></details>
+    <details><summary>Can I use it on a tablet?</summary><p>Yes. The PDF is fillable on screen, or you can print it and keep it in a ring binder.</p></details>
+  </section>
+
+  <footer>
+    <span>The Parent Care File · Noor Intelligence, Wincanton, Somerset</span>
+    <span>Contact: info@baladanmeri.com</span>
+  </footer>
+</div>
+
+</body>
+</html>
